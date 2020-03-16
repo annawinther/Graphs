@@ -7,7 +7,8 @@ class Graph:
 
     """Represent a graph as a dictionary of vertices mapping labels to edges."""
     def __init__(self):
-        self.vertices = {}
+        self.vertices = {} # adjecency list (dictionary)
+        # self.vertices = [[], [], []] £ adjecency matrix (2d list or array)
 
     def add_vertex(self, vertex_id):
         """
