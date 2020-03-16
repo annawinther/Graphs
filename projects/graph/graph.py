@@ -8,39 +8,80 @@ class Graph:
     """Represent a graph as a dictionary of vertices mapping labels to edges."""
     def __init__(self):
         self.vertices = {} # adjecency list (dictionary)
-        # self.vertices = [[], [], []] £ adjecency matrix (2d list or array)
+        # self.vertices = [[], [], []] # adjecency matrix (2d list or array)
 
     def add_vertex(self, vertex_id):
         """
         Add a vertex to the graph.
         """
-        pass  # TODO
+        self.vertices[vertex_id] = set()
 
     def add_edge(self, v1, v2):
         """
         Add a directed edge to the graph.
         """
-        pass  # TODO
+        # check that v1 and v2 exist in the vertices dictionary
+        if v1 in self.vertices and v2 in self.vertices:    
+            #  add v2 to the vertices at v1
+            self.vertices[v1].add[v2]
+        # otherwise
+        else: 
+            # raise an exeption and give an error
+            raise IndexError("That vertex does not exist")
 
     def get_neighbors(self, vertex_id):
         """
         Get all neighbors (edges) of a vertex.
         """
-        pass  # TODO
+        return self.vertices[vertex_id]
 
     def bft(self, starting_vertex):
         """
         Print each vertex in breadth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        # create an empty queue enqueue the starting vertex index
+        q = Queue()
+        q.enqueue(starting_vertex)
+        # create a set to store the visited vertices
+        visitied = set()
+        # while queue is not empty (len greater than 0)
+        while q.size() > 0:
+            # dequeue the first vertex
+            v = q.dequeue()
+            # if that vertex has not been visitied 
+            if v not in visitied:
+                # mark as visited and print for debugging
+                visitied.add()
+                print(v)
+                # iterate through the child vertices of the current vertex
+                for next_vertex in self.vertices[v]:
+                    # enqueue the next vertex
+                    q.enqueue(next_vertex)
 
     def dft(self, starting_vertex):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
         """
-        pass  # TODO
+        # create an empty stack, push the starting vertex index
+        s = Stack()
+        s.push(starting_vertex)
+        # create a set to store the visited vertices
+        visitied = set()
+        # while stack is not empty (len greater than 0)
+        while s.size() > 0:
+            # pop the first vertex
+            v = s.pop()
+            # if that vertex has not been visitied 
+            if v not in visitied:
+                # mark as visited and print for debugging
+                visitied.add()
+                print(v)
+                # iterate through the child vertices of the current vertex
+                for next_vertex in self.vertices[v]:
+                    # push the next vertex
+                    s.push(next_vertex)
 
     def dft_recursive(self, starting_vertex):
         """
@@ -57,7 +98,8 @@ class Graph:
         starting_vertex to destination_vertex in
         breath-first order.
         """
-        pass  # TODO
+        
+        pass  
 
     def dfs(self, starting_vertex, destination_vertex):
         """
