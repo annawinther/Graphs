@@ -95,7 +95,7 @@ class Graph:
         if visited_set is None:
             visited_set = set()
 
-        # print('start', starting_vertex)
+        print(starting_vertex)
         visited_set.add(starting_vertex)
 
         # next_vertex = self.get_neighbors(starting_vertex)
@@ -106,13 +106,13 @@ class Graph:
 
         # otherwise 
         # loop over the connected vertices 
-        for vertex in self.get_neighbors(starting_vertex):
+        for vertex in self.vertices[starting_vertex]:
             # if any of them have been vistied already, do nothing
             # otherwise
             if vertex not in visited_set:
                 # call a recursive function on passing in the vertix and the visited set
                 self.dft_recursive(vertex, visited_set)
-
+        
 
     def bfs(self, starting_vertex, destination_vertex):
         """
@@ -208,7 +208,7 @@ class Graph:
             return path
 
         # loop over the connected vertices 
-        for vertex in self.get_neighbors(starting_vertex):
+        for vertex in self.vertices[starting_vertex]:
             # if any of them have been vistied already, do nothing
             # otherwise
             if vertex not in visited_set:
@@ -264,7 +264,8 @@ if __name__ == '__main__':
         1, 2, 4, 3, 7, 6, 5
         1, 2, 4, 3, 7, 5, 6
     '''
-    graph.bft(1)
+    print("\n bft")
+    print(graph.bft(1))
 
     '''
     Valid DFT paths:
@@ -273,8 +274,10 @@ if __name__ == '__main__':
         1, 2, 4, 7, 6, 3, 5
         1, 2, 4, 6, 3, 5, 7
     '''
-    graph.dft(1)
-    graph.dft_recursive(1)
+    print("\n dft")
+    print(graph.dft(1))
+    print("\n dft recursive")
+    print(graph.dft_recursive(1))
 
     '''
     Valid BFS path:
@@ -292,3 +295,4 @@ if __name__ == '__main__':
     print(graph.dfs(1, 6))
     print("\n dfs recursive")
     print(graph.dfs_recursive(1, 6))
+ 
