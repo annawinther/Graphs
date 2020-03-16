@@ -83,31 +83,34 @@ class Graph:
                     # push the next vertex
                     s.push(next_vertex)
 
-    def dft_recursive(self, starting_vertex, visited_set=set()):
+    def dft_recursive(self, starting_vertex, visited_set=None):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
 
         This should be done using recursion.
         """
-        # visited_set = set()
-        print('start', starting_vertex)
+        
+        if visited_set is None:
+            visited_set = set()
+
+        # print('start', starting_vertex)
         visited_set.add(starting_vertex)
 
-        next_vertex = self.get_neighbors(starting_vertex)
+        # next_vertex = self.get_neighbors(starting_vertex)
 
         # BASE CASE - if there are no neighbors return
-        if len(next_vertex) == 0:
-            return 
+        # if len(next_vertex) == 0:
+        #     return 
+
         # otherwise 
-        else:
-            # loop over the connected vertices 
-            for vertex in next_vertex:
-                # if any of them have been vistied already, do nothing
-                # otherwise
-                if vertex not in visited_set:
-                    # call a recursive function on passing in the vertix and the visited set
-                    self.dft_recursive(vertex, visited_set)
+        # loop over the connected vertices 
+        for vertex in self.get_neighbors(starting_vertex):
+            # if any of them have been vistied already, do nothing
+            # otherwise
+            if vertex not in visited_set:
+                # call a recursive function on passing in the vertix and the visited set
+                self.dft_recursive(vertex, visited_set)
 
 
     def bfs(self, starting_vertex, destination_vertex):
@@ -180,7 +183,7 @@ class Graph:
                     s.push(new_path)
 
 
-    def dfs_recursive(self, starting_vertex):
+    def dfs_recursive(self, starting_vertex, destination_vertex, visited_set=None, path=None):
         """
         Return a list containing a path from
         starting_vertex to destination_vertex in
@@ -188,7 +191,30 @@ class Graph:
 
         This should be done using recursion.
         """
-        pass  # TODO
+        if visited_set is None:
+            visited_set = set()
+        if path is None:
+            path = []
+
+        visited_set.add(starting_vertex)
+
+        path = path + [starting_vertex]
+
+        # if we've found the target vertex return the path
+        if starting_vertex == destination_vertex:
+            return path
+
+        # loop over the connected vertices 
+        for vertex in self.get_neighbors(starting_vertex):
+            # if any of them have been vistied already, do nothing
+            # otherwise
+            if vertex not in visited_set:
+                # call a recursive function on passing in the vertex, destination vertex the visited_set set and the path and store to a new path variable
+                new_path = self.dfs_recursive(vertex, destination_vertex, visited_set, path)
+                if new_path is not None:
+                    return new_path
+        return None
+
 
 if __name__ == '__main__':
     graph = Graph()  # Instantiate your graph
