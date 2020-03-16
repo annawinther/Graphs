@@ -90,7 +90,8 @@ class Graph:
 
         This should be done using recursion.
         """
-        
+
+        # BASE CASE
         if visited_set is None:
             visited_set = set()
 
@@ -193,11 +194,13 @@ class Graph:
         """
         if visited_set is None:
             visited_set = set()
+
         if path is None:
             path = []
 
         visited_set.add(starting_vertex)
-
+        
+        # set the path to be the initial path and at the starting_vertex
         path = path + [starting_vertex]
 
         # if we've found the target vertex return the path
@@ -211,6 +214,8 @@ class Graph:
             if vertex not in visited_set:
                 # call a recursive function on passing in the vertex, destination vertex the visited_set set and the path and store to a new path variable
                 new_path = self.dfs_recursive(vertex, destination_vertex, visited_set, path)
+
+                # if the new path is None return new path
                 if new_path is not None:
                     return new_path
         return None
@@ -241,6 +246,7 @@ if __name__ == '__main__':
     Should print:
         {1: {2}, 2: {3, 4}, 3: {5}, 4: {6, 7}, 5: {3}, 6: {3}, 7: {1, 6}}
     '''
+    print("\n vertices")
     print(graph.vertices)
 
     '''
@@ -274,6 +280,7 @@ if __name__ == '__main__':
     Valid BFS path:
         [1, 2, 4, 6]
     '''
+    print("\n bfs")
     print(graph.bfs(1, 6))
 
     '''
@@ -281,5 +288,7 @@ if __name__ == '__main__':
         [1, 2, 4, 6]
         [1, 2, 4, 7, 6]
     '''
+    print("\n dfs")
     print(graph.dfs(1, 6))
+    print("\n dfs recursive")
     print(graph.dfs_recursive(1, 6))
