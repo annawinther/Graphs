@@ -90,7 +90,14 @@ class Graph:
 
         This should be done using recursion.
         """
-        pass  # TODO
+        # BASE CASE - check ifvisited is none set it to be a set
+        if visited_set == None:
+            visited_set = set()
+        
+        # loop over the connected vertices 
+            # if any of them have been vistied already do nothing
+            # otherwise 
+                # call a recursive function on passing in the vertix and teh visited set
 
     def bfs(self, starting_vertex, destination_vertex):
         """
