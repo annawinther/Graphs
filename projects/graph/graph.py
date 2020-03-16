@@ -23,7 +23,7 @@ class Graph:
         # check that v1 and v2 exist in the vertices dictionary
         if v1 in self.vertices and v2 in self.vertices:    
             #  add v2 to the vertices at v1
-            self.vertices[v1].add[v2]
+            self.vertices[v1].add(v2)
         # otherwise
         else: 
             # raise an exeption and give an error
@@ -44,15 +44,15 @@ class Graph:
         q = Queue()
         q.enqueue(starting_vertex)
         # create a set to store the visited vertices
-        visitied = set()
+        visited = set()
         # while queue is not empty (len greater than 0)
         while q.size() > 0:
             # dequeue the first vertex
             v = q.dequeue()
             # if that vertex has not been visitied 
-            if v not in visitied:
+            if v not in visited:
                 # mark as visited and print for debugging
-                visitied.add()
+                visited.add(v)
                 print(v)
                 # iterate through the child vertices of the current vertex
                 for next_vertex in self.vertices[v]:
@@ -76,7 +76,7 @@ class Graph:
             # if that vertex has not been visitied 
             if v not in visitied:
                 # mark as visited and print for debugging
-                visitied.add()
+                visitied.add(v)
                 print(v)
                 # iterate through the child vertices of the current vertex
                 for next_vertex in self.vertices[v]:
@@ -98,8 +98,34 @@ class Graph:
         starting_vertex to destination_vertex in
         breath-first order.
         """
-        
-        pass  
+        # Create an empty queue and enqueue A PATH TO the starting vertex ID
+        q = Queue()
+        q.enqueue([starting_vertex])
+        # Create a Set to store visited vertices
+        visitied = set()
+        # While the queue is not empty...
+        while q.size() > 0:
+            # Dequeue the first PATH eg -> [a, b, c, r, g]
+            path = q.dequeue()
+            # Grab the last vertex from the PATH
+            vertex = path[-1]
+            # If that vertex has not been visited...
+            if vertex not in visitied:
+                # CHECK IF IT'S THE TARGET
+                if vertex == destination_vertex:
+                    # IF SO, RETURN PATH
+                    return path
+                # Mark it as visited...
+                visitied.add(vertex)
+               # For all of the vertices acosiated with the vertex
+                for next_vertex in self.vertices[vertex]:
+                    # copy the path that we used in order to get to this vertex
+                    new_path = list(path)
+                    # append the next vertex accosiated with the vertex to the new path
+                    new_path.append(next_vertex)
+                    # Store the list in the Queue and reloop
+                    q.enqueue(new_path)
+
 
     def dfs(self, starting_vertex, destination_vertex):
         """
