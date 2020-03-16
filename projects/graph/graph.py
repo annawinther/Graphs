@@ -83,21 +83,32 @@ class Graph:
                     # push the next vertex
                     s.push(next_vertex)
 
-    def dft_recursive(self, starting_vertex):
+    def dft_recursive(self, starting_vertex, visited_set=set()):
         """
         Print each vertex in depth-first order
         beginning from starting_vertex.
 
         This should be done using recursion.
         """
-        # BASE CASE - check ifvisited is none set it to be a set
-        if visited_set == None:
-            visited_set = set()
-        
-        # loop over the connected vertices 
-            # if any of them have been vistied already do nothing
-            # otherwise 
-                # call a recursive function on passing in the vertix and teh visited set
+        # visited_set = set()
+        print('start', starting_vertex)
+        visited_set.add(starting_vertex)
+
+        next_vertex = self.get_neighbors(starting_vertex)
+
+        # BASE CASE - if there are no neighbors return
+        if len(next_vertex) == 0:
+            return 
+        # otherwise 
+        else:
+            # loop over the connected vertices 
+            for vertex in next_vertex:
+                # if any of them have been vistied already, do nothing
+                # otherwise
+                if vertex not in visited_set:
+                    # call a recursive function on passing in the vertix and the visited set
+                    self.dft_recursive(vertex, visited_set)
+
 
     def bfs(self, starting_vertex, destination_vertex):
         """
@@ -124,7 +135,7 @@ class Graph:
                     return path
                 # Mark it as visited...
                 visitied.add(vertex)
-               # For all of the vertices acosiated with the vertex
+               # For all of the vertices acosiated with the vertex Then add A PATH TO its neighbors to the back of the queue
                 for next_vertex in self.vertices[vertex]:
                     # copy the path that we used in order to get to this vertex
                     new_path = list(path)
