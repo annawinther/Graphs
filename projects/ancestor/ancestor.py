@@ -10,7 +10,7 @@ class Graph:
     def add_edge(self, v1, v2):
         if v1 not in self.vertices:
             self.add_vertex(v1)
-        if v2 in self.vertices:
+        if v2 not in self.vertices:
             self.add_vertex(v2)
         if v1 in self.vertices and v2 in self.vertices:    
             self.vertices[v2].add(v1)
