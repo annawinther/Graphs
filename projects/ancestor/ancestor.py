@@ -42,5 +42,16 @@ def earliest_ancestor(ancestors, starting_node):
     # This is a relationship graph
     # The data is formatted as a list of (parent, child) pairs. I.e (1, 3) --> 3 is a child of one, 3 is a child of 2. 6 is a child of 3, 6 is a child of 5 etc --> [(1,3), (2,3), (3,6), (5,6)]
     # We need to write a function that returns their earliest known ancestor, assuming that every step 'up' has the same weight. Therefore, whichever path has the most 'steps'/edges going up leads to the earliest known ancestor.
+
+    # create a new graph
+
+    # loop over ancestors and for each add a new edge as a pair (passing in the first and second)
+
+    # then use the dft function to traverse through the graph starting at the starting node.
+
+    # if there are no ancestors 
+        #  return -1
+
+    # otherwise return the result of the traversal
     pass
 
