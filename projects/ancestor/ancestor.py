@@ -9,9 +9,7 @@ class Graph:
 
     def add_edge(self, v1, v2):
         if v1 in self.vertices and v2 in self.vertices:    
-            self.vertices[v1].add(v2)
-        else: 
-            raise IndexError("That vertex does not exist")
+            self.vertices[v2].add(v1)
     
     def dft(self, starting_vertex):
         # create an empty stack, push the starting vertex index
@@ -44,14 +42,24 @@ def earliest_ancestor(ancestors, starting_node):
     # We need to write a function that returns their earliest known ancestor, assuming that every step 'up' has the same weight. Therefore, whichever path has the most 'steps'/edges going up leads to the earliest known ancestor.
 
     # create a new graph
-
+    graph = Graph()
+    print('hello')
     # loop over ancestors and for each add a new edge as a pair (passing in the first and second)
+    for ancestor in ancestors:
+        parent = ancestor[0]
+        child = ancestor[1]
+        # graph.add_vertex(parent)
+        # graph.add_vertex(child)
+        graph.add_edge(parent, child)
 
-    # then use the dft function to traverse through the graph starting at the starting node.
+    # then use the dft function to traverse through the graph starting at the starting node and store in a variable traversed_graph
+    traversed_graph = graph.dft(starting_node)
 
-    # if there are no ancestors 
+    # if there are no ancestors (if after traversing we're still at the beginning)
+    if traversed_graph == starting_node:
         #  return -1
+        return -1
 
     # otherwise return the result of the traversal
-    pass
+    return traversed_graph 
 
