@@ -8,6 +8,10 @@ class Graph:
         self.vertices[vertex_id] = set()
 
     def add_edge(self, v1, v2):
+        if v1 not in self.vertices:
+            self.add_vertex(v1)
+        if v2 in self.vertices:
+            self.add_vertex(v2)
         if v1 in self.vertices and v2 in self.vertices:    
             self.vertices[v2].add(v1)
     
@@ -63,3 +67,6 @@ def earliest_ancestor(ancestors, starting_node):
     # otherwise return the result of the traversal
     return traversed_graph 
 
+
+# test_ancestors = [(1, 3), (2, 3), (3, 6), (5, 6), (5, 7), (4, 5), (4, 8), (8, 9), (11, 8), (10, 1)]
+# earliest_ancestor(test_ancestors, 6)
