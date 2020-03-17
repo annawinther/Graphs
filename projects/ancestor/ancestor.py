@@ -81,12 +81,10 @@ class Graph:
                 # Store the list in the Queue and reloop
                 s.push(new_path)
 
-        print(path)
-        print(earliest_ancestor)
+        # print(path)
+        # print(earliest_ancestor)
         # return the earliest_ancestor
         return earliest_ancestor
-        
-
 
 def earliest_ancestor(ancestors, starting_node):
     # This is a relationship graph
@@ -95,23 +93,18 @@ def earliest_ancestor(ancestors, starting_node):
 
     # create a new graph
     graph = Graph()
-    print('hello')
     
     # loop over ancestors and for each add a new edge as a pair (passing in the first and second)
     for ancestor in ancestors:
         parent = ancestor[0]
         child = ancestor[1]
-        # graph.add_vertex(parent)
-        # graph.add_vertex(child)
         graph.add_edge(parent, child)
 
     # then use the dfs function to traverse through the graph starting at the starting node and store in a variable traversed_graph
     traversed_graph = graph.dfs(starting_node)
-    print(traversed_graph)
     # if there are no ancestors (if after traversing we're still at the beginning)
 
     if traversed_graph == starting_node:
-        #  return -1
         return -1
     # loop over the stored path, get the smallest number
     # otherwise return the result of the traversal
