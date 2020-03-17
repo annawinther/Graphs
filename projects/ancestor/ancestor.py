@@ -39,42 +39,52 @@ class Graph:
     #                 s.push(next_vertex)
 
     #     return new_list[-1]
+    # check set  if empty = no ancestor: return -1
+    # if ancestor return the lowest digit
 
     def dfs(self, starting_vertex):
         # Create an empty stack and push A PATH TO the starting vertex ID
         s = Stack()
         s.push([starting_vertex])
-        # Create a Set to store visited vertices
-        visitied = set()
+
+        # set a variable called longest path that stored the longest path we have
+        longest_path = 1
+        earliest_ancestor = -1
+
         # While the stack is not empty...
         while s.size() > 0:
             # pop the first PATH eg -> [a, b, c, r, g]
             path = s.pop()
-            # Grab the last vertex from the PATH
-            vertex = path[-1]
-            # If that vertex has not been visited...
-            if vertex not in visitied:
-                # CHECK IF IT'S THE TARGET
-                # DO SOMETHING ELSE HERE: CHECK IF THE LENGHT OF PATH IS GREATER OR EQUAL TO THE LONGEST PATH WE'VE FOUND
-                # if vertex == destination_vertex:
-                #     # IF SO, RETURN PATH
-                #     path = set()
-                #     return path
+            # Grab the last vertex from the PATH and store in current vertex variable
+            current_vertex = path[-1]
 
-                    # use set to store the path
+            # now check if the lenth of our path is equal to the longes tpath 
+            if len(path) == longest_path:
+                # if so, check if the current vertex is smaller than the earliest ancestor 
+                if current_vertex < earliest_ancestor:
+                    # update the longest path to be the path we're on and the earliest ancestor to be the current vertex
+                    longest_path = len(path)
+                    earliest_ancestor = current_vertex
 
-                # Mark it as visited...
-                visitied.add(vertex)
+            # then check (if path is not equal to longest path)if the length of our path is greater than the longes tpath
+            if len(path) > longest_path:
+                # if so, update the longest path to be the path we're on and the earliest ancestor to be the current vertex
+                longest_path = len(path)
+                earliest_ancestor = current_vertex
+            
+            # For all of the ancestors acosiated with the current vertex
+            for ancestor in self.vertices[current_vertex]:
+                # copy the path that we used in order to get to this vertex
+                new_path = list(path)
+                # append the ancestor accosiated with the vertex to the new path
+                new_path.append(ancestor)
+                # Store the list in the Queue and reloop
+                s.push(new_path)
 
-               # For all of the vertices acosiated with the vertex
-                for next_vertex in self.vertices[vertex]:
-                    # copy the path that we used in order to get to this vertex
-                    new_path = list(path)
-                    # append the next vertex accosiated with the vertex to the new path
-                    new_path.append(next_vertex)
-                    # Store the list in the Queue and reloop
-                    s.push(new_path)
-
+        print(path)
+        print(earliest_ancestor)
+        # return the earliest_ancestor
+        return earliest_ancestor
         
 
 
