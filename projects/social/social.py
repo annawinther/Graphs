@@ -91,6 +91,33 @@ class SocialGraph:
         """
         visited = {}  # Note that this is a dictionary, not a set
         # !!!! IMPLEMENT ME
+
+        # Create an empty queue and enqueue A PATH TO the user id 
+
+        q = Queue()
+        q.enqueue([user_id])
+        # Create a Set to store visited vertices
+        visitied = set()
+        # While the queue is not empty...
+        while q.size() > 0:
+            # Dequeue the first PATH eg -> [a, b, c, r, g]
+            path = q.dequeue()
+            # Grab the last vertex from the PATH
+            vertex = path[-1]
+            # If that vertex has not been visited...
+            for next_vertex in self.vertices[vertex]:
+                if vertex not in visitied:
+                    # copy the path that we used in order to get to this vertex
+                    new_path = list(path)
+                    # append the next vertex accosiated with the vertex to the new path
+                    new_path.append(next_vertex)
+                    # Store the list in the Queue and reloop
+                    q.enqueue(new_path)
+
+               # For all of the vertices acosiated with the vertex Then add A PATH TO its neighbors to the back of the queue
+
+
+
         return visited
 
 
