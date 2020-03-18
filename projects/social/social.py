@@ -93,30 +93,27 @@ class SocialGraph:
         # !!!! IMPLEMENT ME
 
         # Create an empty queue and enqueue A PATH TO the user id 
-
         q = Queue()
         q.enqueue([user_id])
-        # Create a Set to store visited vertices
-        visitied = set()
         # While the queue is not empty...
         while q.size() > 0:
             # Dequeue the first PATH eg -> [a, b, c, r, g]
             path = q.dequeue()
-            # Grab the last vertex from the PATH
-            vertex = path[-1]
-            # If that vertex has not been visited...
-            for next_vertex in self.vertices[vertex]:
-                if vertex not in visitied:
-                    # copy the path that we used in order to get to this vertex
+            # Grab the current from the last item in PATH
+            current_friend = path[-1]
+            # loop over each friend in the friendships at the current friend
+            for friend in self.friendships[current_friend]:
+                # if the friend is not in visited
+                if friend not in visited:
+                    visited[friend] = path
+                    # copy the path that we used in order to get to this friend
                     new_path = list(path)
-                    # append the next vertex accosiated with the vertex to the new path
-                    new_path.append(next_vertex)
+                    # append the next friend accosiated with the friend to the new path
+                    new_path.append(friend)
                     # Store the list in the Queue and reloop
                     q.enqueue(new_path)
 
                # For all of the vertices acosiated with the vertex Then add A PATH TO its neighbors to the back of the queue
-
-
 
         return visited
 
