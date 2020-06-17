@@ -102,11 +102,11 @@ def earliest_ancestor(ancestors, starting_node):
 
     # then use the dfs function to traverse through the graph starting at the starting node and store in a variable traversed_graph
     traversed_graph = graph.dfs(starting_node)
-    # if there are no ancestors (if after traversing we're still at the beginning)
 
+    # if there are no ancestors (if after traversing we're still at the beginning)
     if traversed_graph == starting_node:
         return -1
-    # loop over the stored path, get the smallest number
-    # otherwise return the result of the traversal
+
+    # return the result of the traversal
     return traversed_graph 
 
