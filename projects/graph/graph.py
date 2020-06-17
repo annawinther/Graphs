@@ -22,7 +22,7 @@ class Graph:
         """
         # check that v1 and v2 exist in the vertices dictionary
         if v1 in self.vertices and v2 in self.vertices:    
-            #  add v2 to the vertices at v1
+            # add v2 to the vertices at v1
             self.vertices[v1].add(v2)
         # otherwise
         else: 
@@ -172,8 +172,12 @@ class Graph:
                 if vertex == destination_vertex:
                     # IF SO, RETURN PATH
                     return path
+
+                    # use set to store the path
+
                 # Mark it as visited...
                 visitied.add(vertex)
+
                # For all of the vertices acosiated with the vertex
                 for next_vertex in self.vertices[vertex]:
                     # copy the path that we used in order to get to this vertex
@@ -182,6 +186,11 @@ class Graph:
                     new_path.append(next_vertex)
                     # Store the list in the Queue and reloop
                     s.push(new_path)
+
+        # check set  if empty = no ancestor: return -1
+        # if ancestor return the lowest digit
+
+                
 
 
     def dfs_recursive(self, starting_vertex, destination_vertex, visited_set=None, path=None):
